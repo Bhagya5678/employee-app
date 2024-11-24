@@ -1,0 +1,33 @@
+<div>
+    <mat-form-field>
+        <mat-label>Search Employees</mat-label>
+        <input matInput [(ngModel)]="searchQuery" placeholder="Search employees" />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="filterEmployees()">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let employee">{{ employee.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="employee_name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let employee">{{ employee.employee_name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="employee_salary">
+            <th mat-header-cell *matHeaderCellDef> Salary </th>
+            <td mat-cell *matCellDef="let employee">{{ employee.employee_salary | currency:'USD' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let employee">
+                <a [routerLink]="['/employees', employee.id]">View Details</a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
